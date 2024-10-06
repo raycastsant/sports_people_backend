@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "countries")
+@Table(name = "countries", uniqueConstraints = { @UniqueConstraint(columnNames = { "name" }) })
 public class Country {
 
     @Id
@@ -16,11 +16,11 @@ public class Country {
     @Column(name = "id")
     private Long id;
 
-    @OneToMany(mappedBy = "country", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "country", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private Set<SportMan> sportMen;
 
     @Length(max = 100)
     @NotNull
     @Column(name = "name")
-    private String name;
+    public String name;
 }

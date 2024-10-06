@@ -26,8 +26,8 @@ public class SportMan {
 
     @Length(max = 100)
     @NotNull
-    @Column(name = "name")
-    private String name;
+    @Column(name = "full_name")
+    private String fullName;
 
     @NotNull
     @Column(name = "age")
