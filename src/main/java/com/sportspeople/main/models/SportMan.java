@@ -4,7 +4,9 @@ import java.util.Set;
 import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.sportspeople.main.custom_validators.NameValidCharacters;
+import com.sportspeople.main.custom_validators.NameMaxLength;
+import com.sportspeople.main.custom_validators.NameMinLength;
+import com.sportspeople.main.custom_validators.NameSpecialCharacters;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -30,7 +32,9 @@ public class SportMan {
     @Length(max = 100)
     @NotNull
     @Column(name = "name")
-    @NameValidCharacters
+    @NameSpecialCharacters
+    @NameMinLength
+    @NameMaxLength
     private String name;
 
     @NotNull

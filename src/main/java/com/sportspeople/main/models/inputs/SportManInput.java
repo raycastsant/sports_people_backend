@@ -1,9 +1,5 @@
 package com.sportspeople.main.models.inputs;
 
-import java.util.Set;
-
-import com.sportspeople.main.models.SportManMedals;
-
 import lombok.Data;
 
 /** Class used to handle the SportMan insert/update request body */
