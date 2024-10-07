@@ -1,6 +1,11 @@
 package com.sportspeople.main.models;
 
 import java.sql.Date;
+
+import com.sportspeople.main.custom_validators.NameMaxLength;
+import com.sportspeople.main.custom_validators.NameMinLength;
+import com.sportspeople.main.custom_validators.NameSpecialCharacters;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -29,6 +34,9 @@ public class SportManMedals {
 
     @NotNull
     @Column(name = "event_name")
+    @NameSpecialCharacters
+    @NameMinLength
+    @NameMaxLength(maxLength = 100)
     private String eventName;
 
     @NotNull

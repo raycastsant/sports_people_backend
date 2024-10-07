@@ -3,6 +3,11 @@ package com.sportspeople.main.models;
 import java.util.Set;
 
 import org.hibernate.validator.constraints.Length;
+
+import com.sportspeople.main.custom_validators.NameMaxLength;
+import com.sportspeople.main.custom_validators.NameMinLength;
+import com.sportspeople.main.custom_validators.NameSpecialCharacters;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -23,5 +28,8 @@ public class SportCategory {
     @Length(max = 100)
     @NotNull
     @Column(name = "name")
+    @NameSpecialCharacters
+    @NameMinLength
+    @NameMaxLength
     private String name;
 }
