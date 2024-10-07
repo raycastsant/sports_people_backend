@@ -16,8 +16,7 @@ public class Medals {
     @Column(name = "id")
     private Long id;
 
-    @OneToMany(mappedBy = "medals", cascade = { CascadeType.PERSIST,
-            CascadeType.MERGE })
+    @OneToMany(mappedBy = "medals", cascade = CascadeType.ALL)
     private Set<SportManMedals> sportManMedals;
 
     @NotNull

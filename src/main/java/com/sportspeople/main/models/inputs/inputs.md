@@ -1,0 +1,1 @@
+Input classes are models that are used to handle insert and update requests for entities that depend on another entity. That is, if an entity has a @ManyToOne field, then an input model is used to handle the insert/update request.

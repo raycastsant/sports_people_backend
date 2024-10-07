@@ -1,8 +1,10 @@
 package com.sportspeople.main.models;
 
 import java.util.Set;
-
 import org.hibernate.validator.constraints.Length;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.sportspeople.main.custom_validators.NameValidCharacters;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -17,17 +19,19 @@ public class SportMan {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JsonBackReference
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
 
-    @OneToMany(mappedBy = "sportMan", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @OneToMany(mappedBy = "sportMan", cascade = CascadeType.ALL)
     private Set<SportManMedals> sportManMedals;
 
     @Length(max = 100)
     @NotNull
-    @Column(name = "full_name")
-    private String fullName;
+    @Column(name = "name")
+    @NameValidCharacters
+    private String name;
 
     @NotNull
     @Column(name = "age")
