@@ -14,7 +14,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "sport_categories")
+@Table(name = "sport_categories", uniqueConstraints = { @UniqueConstraint(columnNames = { "name" }) })
 public class SportCategory {
 
     @Id
