@@ -1,5 +1,7 @@
 package com.sportspeople.main.controller;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.sportspeople.main.controller.utils.ResponseUtils;
+import com.sportspeople.main.controller.helpers.ResponseHelper;
 import com.sportspeople.main.models.Country;
 import com.sportspeople.main.models.SportMan;
 import com.sportspeople.main.models.inputs.SportManInput;
@@ -33,12 +35,24 @@ public class SportManController {
         return sportManService.getAllSportMen();
     }
 
+    @GetMapping("/all/indexed-by-id")
+    public @ResponseBody HashMap<Long, SportMan> getAllSportMenindexed() {
+        final Iterator<SportMan> sportMen = sportManService.getAllSportMen().iterator();
+        final HashMap<Long, SportMan> result = new HashMap<>();
+        while (sportMen.hasNext()) {
+            final SportMan spman = sportMen.next();
+            result.put(spman.getId(), spman);
+        }
+
+        return result;
+    }
+
     @PostMapping(path = "/add")
     public @ResponseBody ResponseEntity<Object> addNewSportMan(@Valid @RequestBody SportManInput input) {
         // search for a valid country
         final Optional<Country> country = countryService.findById(input.getCountryId());
         if (country.isEmpty()) {
-            return ResponseUtils.generateResponse("Could not get the country with ID: " + input.getCountryId(),
+            return ResponseHelper.generateResponse("Could not get the country with ID: " + input.getCountryId(),
                     HttpStatus.OK, input);
         } else {
 
@@ -49,7 +63,7 @@ public class SportManController {
             sportMan.setDescription(input.getDescription());
 
             sportMan = sportManService.saveSportMan(sportMan);
-            return ResponseUtils.generateResponse("Successfully retrieved data!", HttpStatus.OK, sportMan);
+            return ResponseHelper.generateResponse("Successfully retrieved data!", HttpStatus.OK, sportMan);
         }
     }
 }
