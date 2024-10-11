@@ -1,9 +1,13 @@
 package com.sportspeople.main.models;
 
+import java.util.List;
 import java.util.Set;
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.sportspeople.main.custom_validators.NameMaxLength;
 import com.sportspeople.main.custom_validators.NameMinLength;
 import com.sportspeople.main.custom_validators.NameSpecialCharacters;
@@ -14,6 +18,8 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "countries", uniqueConstraints = { @UniqueConstraint(columnNames = { "name" }) })
+// @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+// property = "id")
 public class Country {
 
     @Id
@@ -21,9 +27,10 @@ public class Country {
     @Column(name = "id")
     private Long id;
 
-    @JsonManagedReference
+    @JsonIgnore
+    // @JsonManagedReference
     @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
-    private Set<SportMan> sportMen;
+    private List<SportMan> sportMen;
 
     @Length(max = 100)
     @NotNull

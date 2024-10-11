@@ -1,11 +1,14 @@
 package com.sportspeople.main.models;
 
 import java.sql.Date;
+
+// import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sportspeople.main.custom_validators.NameMaxLength;
 import com.sportspeople.main.custom_validators.NameMinLength;
 import com.sportspeople.main.custom_validators.NameSpecialCharacters;
 import com.sportspeople.main.models.enums.MedalType;
-import com.sportspeople.main.models.enums.MedalTypeConverter;
+// import com.sportspeople.main.models.enums.MedalTypeConverter;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -20,9 +23,10 @@ public class Medal {
     @Column(name = "id")
     private Long id;
 
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "sport_man_id")
-    private SportMan sportMan;
+    private SportMan sportman;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
@@ -41,7 +45,7 @@ public class Medal {
 
     // @Convert(converter = MedalTypeConverter.class)
     @NotNull
-    // @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     @Column(name = "medal_type")
-    private String medalType;
+    private MedalType medalType;
 }

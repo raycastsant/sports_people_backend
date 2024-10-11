@@ -1,8 +1,11 @@
 package com.sportspeople.main.models;
 
+import java.util.List;
 import java.util.Set;
 
 import org.hibernate.validator.constraints.Length;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sportspeople.main.custom_validators.NameMaxLength;
 import com.sportspeople.main.custom_validators.NameMinLength;
 import com.sportspeople.main.custom_validators.NameSpecialCharacters;
@@ -20,8 +23,9 @@ public class SportCategory {
     @Column(name = "id")
     private Long id;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private Set<Medal> sportManMedals;
+    private List<Medal> sportManMedals;
 
     @Length(max = 100)
     @NotNull

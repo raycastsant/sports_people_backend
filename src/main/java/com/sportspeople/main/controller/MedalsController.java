@@ -14,6 +14,7 @@ import com.sportspeople.main.controller.helpers.ResponseHelper;
 import com.sportspeople.main.models.Medal;
 import com.sportspeople.main.models.SportCategory;
 import com.sportspeople.main.models.SportMan;
+import com.sportspeople.main.models.enums.MedalType;
 import com.sportspeople.main.models.inputs.MedalsInput;
 import com.sportspeople.main.service.MedalsService;
 import com.sportspeople.main.service.SportCategoryService;
@@ -56,11 +57,11 @@ public class MedalsController {
 
         Medal medalData = new Medal();
         medalData.setCategory(category.get());
-        medalData.setSportMan(sportMan.get());
+        medalData.setSportman(sportMan.get());
         medalData.setEventName(input.getEventName());
         medalData.setDate(input.getDate());
         // medalData.setMedalType(input.getMedalType());
-        medalData.setMedalType("GOLD");
+        medalData.setMedalType(MedalType.GOLD);
         medalData = medalsService.saveMedals(medalData);
 
         return ResponseHelper.generateResponse("Successfully saved data!", HttpStatus.OK, medalData);
