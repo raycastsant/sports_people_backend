@@ -1,14 +1,11 @@
 package com.sportspeople.main.models;
 
 import java.sql.Date;
-
-// import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sportspeople.main.custom_validators.NameMaxLength;
 import com.sportspeople.main.custom_validators.NameMinLength;
 import com.sportspeople.main.custom_validators.NameSpecialCharacters;
 import com.sportspeople.main.models.enums.MedalType;
-// import com.sportspeople.main.models.enums.MedalTypeConverter;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -43,7 +40,6 @@ public class Medal {
     @Column(name = "date")
     private Date date;
 
-    // @Convert(converter = MedalTypeConverter.class)
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "medal_type")

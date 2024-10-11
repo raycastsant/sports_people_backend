@@ -1,10 +1,7 @@
 package com.sportspeople.main.models;
 
 import java.util.List;
-import java.util.Set;
-
 import org.hibernate.validator.constraints.Length;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sportspeople.main.custom_validators.NameMaxLength;
 import com.sportspeople.main.custom_validators.NameMinLength;

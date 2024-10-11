@@ -1,14 +1,7 @@
 package com.sportspeople.main.models;
 
 import java.util.List;
-import java.util.Set;
 import org.hibernate.validator.constraints.Length;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.sportspeople.main.custom_validators.NameMaxLength;
 import com.sportspeople.main.custom_validators.NameMinLength;
 import com.sportspeople.main.custom_validators.NameSpecialCharacters;
@@ -24,17 +17,12 @@ public class SportMan {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    // @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-    // property = "id")
     private Long id;
 
-    // @JsonBackReference
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
 
-    // @JsonManagedReference
-    // @JsonIgnore
     @OneToMany(mappedBy = "sportman", cascade = CascadeType.ALL)
     private List<Medal> sportManMedals;
 

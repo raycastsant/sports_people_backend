@@ -6,7 +6,6 @@ import lombok.Data;
 @Data
 public class SportManInput {
     private Integer countryId;
-    // private Set<SportManMedals> sportManMedals;
     private String name;
     private Integer age;
     private String description;

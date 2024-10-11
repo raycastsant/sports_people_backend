@@ -1,7 +1,6 @@
 package com.sportspeople.main.models.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -9,15 +8,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum MedalType {
     GOLD("GOLD"), SILVER("SILVER"), BRONZE("BRONZE");
-    // GOLD, SILVER, BRONZE;
 
     private final String value;
 
-    // MedalType(String jsonValue) {
-    // this.jsonValue = jsonValue;
-    // }
-
-    @JsonValue
     public String getValue() {
         return value;
     }
@@ -27,7 +20,7 @@ public enum MedalType {
         return String.valueOf(value);
     }
 
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
     public static MedalType fromValue(String value) {
         for (MedalType b : MedalType.values()) {
             if (b.value.equals(value)) {
