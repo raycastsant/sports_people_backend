@@ -27,7 +27,7 @@ public class SportMan {
     private Country country;
 
     @OneToMany(mappedBy = "sportMan", cascade = CascadeType.ALL)
-    private Set<SportManMedals> sportManMedals;
+    private Set<Medal> sportManMedals;
 
     @Length(max = 100)
     @NotNull

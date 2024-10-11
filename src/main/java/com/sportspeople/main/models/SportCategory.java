@@ -3,11 +3,9 @@ package com.sportspeople.main.models;
 import java.util.Set;
 
 import org.hibernate.validator.constraints.Length;
-
 import com.sportspeople.main.custom_validators.NameMaxLength;
 import com.sportspeople.main.custom_validators.NameMinLength;
 import com.sportspeople.main.custom_validators.NameSpecialCharacters;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -23,7 +21,7 @@ public class SportCategory {
     private Long id;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private Set<SportManMedals> sportManMedals;
+    private Set<Medal> sportManMedals;
 
     @Length(max = 100)
     @NotNull

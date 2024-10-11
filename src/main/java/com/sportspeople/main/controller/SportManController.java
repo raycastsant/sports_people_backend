@@ -55,7 +55,6 @@ public class SportManController {
             return ResponseHelper.generateResponse("Could not get the country with ID: " + input.getCountryId(),
                     HttpStatus.OK, input);
         } else {
-
             SportMan sportMan = new SportMan();
             sportMan.setCountry(country.get());
             sportMan.setName(input.getName());
@@ -63,7 +62,7 @@ public class SportManController {
             sportMan.setDescription(input.getDescription());
 
             sportMan = sportManService.saveSportMan(sportMan);
-            return ResponseHelper.generateResponse("Successfully retrieved data!", HttpStatus.OK, sportMan);
+            return ResponseHelper.generateResponse("Successfully saved data!", HttpStatus.OK, sportMan);
         }
     }
 }

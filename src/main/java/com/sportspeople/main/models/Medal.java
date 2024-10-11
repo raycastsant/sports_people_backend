@@ -1,19 +1,19 @@
 package com.sportspeople.main.models;
 
 import java.sql.Date;
-
 import com.sportspeople.main.custom_validators.NameMaxLength;
 import com.sportspeople.main.custom_validators.NameMinLength;
 import com.sportspeople.main.custom_validators.NameSpecialCharacters;
-
+import com.sportspeople.main.models.enums.MedalType;
+import com.sportspeople.main.models.enums.MedalTypeConverter;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "sport_man_medals")
-public class SportManMedals {
+@Table(name = "medals")
+public class Medal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,10 +23,6 @@ public class SportManMedals {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "sport_man_id")
     private SportMan sportMan;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "medals_id")
-    private Medals medals;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
@@ -42,4 +38,10 @@ public class SportManMedals {
     @NotNull
     @Column(name = "date")
     private Date date;
+
+    // @Convert(converter = MedalTypeConverter.class)
+    @NotNull
+    // @Enumerated(EnumType.STRING)
+    @Column(name = "medal_type")
+    private String medalType;
 }
