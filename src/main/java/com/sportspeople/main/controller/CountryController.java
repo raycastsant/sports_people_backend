@@ -1,14 +1,22 @@
 package com.sportspeople.main.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.sportspeople.main.controller.helpers.ResponseHelper;
 import com.sportspeople.main.models.Country;
+import com.sportspeople.main.models.inputs.CountryInput;
 import com.sportspeople.main.service.CountryService;
 
 import jakarta.validation.Valid;
@@ -26,8 +34,44 @@ public class CountryController {
         return countryService.getAllCountries();
     }
 
+    @GetMapping(path = "/{id}")
+    public @ResponseBody ResponseEntity<Object> readCountry(@PathVariable int id) {
+        final Optional<Country> country = countryService.findById(id);
+        if (country.isEmpty()) {
+            return ResponseHelper.generateResponse("Country with Id " + id + " does not exist.", HttpStatus.NOT_FOUND,
+                    country);
+        } else {
+            return ResponseHelper.generateResponse("OK", HttpStatus.OK, country);
+        }
+    }
+
     @PostMapping(path = "/add")
     public @ResponseBody ResponseEntity<Country> addNewCountry(@Valid @RequestBody Country country) {
         return ResponseEntity.ok(countryService.saveCountry(country));
+    }
+
+    @PutMapping(path = "/update/{id}")
+    public @ResponseBody ResponseEntity<Object> updateCountry(@Valid @RequestBody CountryInput input,
+            @PathVariable int id) {
+        final Country country = countryService.updateCountry(input, id);
+        if (null == country) {
+            return ResponseHelper.generateResponse("Country with Id " + id + " does not exist.", HttpStatus.NOT_FOUND,
+                    country);
+        } else {
+            return ResponseHelper.generateResponse("OK", HttpStatus.OK, country);
+        }
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public @ResponseBody ResponseEntity<Object> deleteCountry(@PathVariable int id) {
+        final Country country = countryService.findById(id).orElse(null);
+        final Boolean result = countryService.deleteCountry(country);
+        if (!result) {
+            return ResponseHelper.generateResponse("Could not delete Country with Id " + id, HttpStatus.NOT_FOUND,
+                    result);
+        } else {
+
+            return ResponseHelper.generateResponse("Country deleted.", HttpStatus.OK, result);
+        }
     }
 }

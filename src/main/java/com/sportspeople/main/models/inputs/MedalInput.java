@@ -8,7 +8,7 @@ import lombok.Data;
 
 /** Class used to handle the Medals insert/update request body */
 @Data
-public class MedalsInput {
+public class MedalInput {
     private int sportManId;
     private int sportCategoryId;
     private String eventName;
