@@ -1,5 +1,4 @@
 # Getting Started
-When you unzip the zip file you will find the project source code (sports_people folder), the MySql database (sports_people.sql) and a Postman collection with all the API urls (SpringBoot.postman_collection_v2.1.json). You will also find an image with the MySql database relationship design.
 
 1. Import the database under the name "sports people"
 2. Import the Postman Project
